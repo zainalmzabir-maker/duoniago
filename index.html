@@ -22,7 +22,7 @@
       --duo-gray: #e5e5e5;
       --duo-dark-gray: #afafaf;
       --duo-text: #3c3c3c;
-      --duo-bg: #f7f7f7;
+      --duo-bg: #ffffff;
     }
 
     * {
@@ -35,7 +35,7 @@
     }
 
     body {
-      background-color: var(--duo-bg);
+      background-color: #f7f7f7;
       color: var(--duo-text);
       display: flex;
       justify-content: center;
@@ -53,7 +53,121 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.06);
     }
 
-    /* TOP BAR */
+    /* ====================================================
+       PAGE 1: DUOLINGO WELCOME / LOGIN LANDING SCREEN
+       ==================================================== */
+    #view-welcome {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      padding: 36px 24px 28px 24px;
+      text-align: center;
+      background: #ffffff;
+    }
+
+    .duo-mascot-box {
+      margin-top: 40px;
+      position: relative;
+    }
+    .duo-mascot-img {
+      width: 140px;
+      height: 140px;
+      background: var(--duo-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 74px;
+      box-shadow: 0 8px 0 var(--duo-green-shadow);
+      margin: 0 auto;
+      animation: floatMascot 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes floatMascot {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-8px); }
+    }
+
+    .brand-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--duo-green);
+      margin-top: 24px;
+      letter-spacing: -0.5px;
+    }
+    .brand-tagline {
+      font-size: 16px;
+      font-weight: 700;
+      color: #777777;
+      margin-top: 8px;
+      line-height: 1.4;
+      max-width: 290px;
+    }
+
+    .welcome-actions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn-duo-main {
+      background: var(--duo-green);
+      color: #ffffff;
+      border: none;
+      border-bottom: 4px solid var(--duo-green-shadow);
+      padding: 15px;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-radius: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.08s;
+    }
+    .btn-duo-main:active {
+      transform: translateY(3px);
+      border-bottom-width: 1px;
+    }
+
+    .btn-duo-outline {
+      background: #ffffff;
+      color: var(--duo-blue);
+      border: 2px solid var(--duo-gray);
+      border-bottom: 4px solid var(--duo-gray);
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-radius: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.08s, background 0.1s;
+    }
+    .btn-duo-outline:active {
+      transform: translateY(3px);
+      border-bottom-width: 2px;
+      background: #fbfbfb;
+    }
+
+    .admin-link-btn {
+      background: none;
+      border: none;
+      color: #999999;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+      text-decoration: underline;
+    }
+
+    /* ====================================================
+       PAGE 2: LEARNING APP (HEADER & PATH)
+       ==================================================== */
     header {
       position: sticky;
       top: 0;
@@ -77,37 +191,26 @@
     .stat-badge.gems { color: var(--duo-blue); }
     .stat-badge.hearts { color: var(--duo-red); }
 
-    .btn-top {
-      background: #f0f0f0;
+    .btn-pill {
+      background: #f3f3f3;
       border: 1px solid var(--duo-gray);
       border-radius: 12px;
-      padding: 6px 10px;
-      font-size: 13px;
+      padding: 5px 10px;
+      font-size: 12px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    /* GUEST BANNER */
-    .guest-banner {
+    .guest-trial-bar {
       background: #fff8e1;
       border-bottom: 2px solid #ffe082;
-      padding: 10px 16px;
-      font-size: 13px;
+      padding: 8px 14px;
+      font-size: 12px;
       font-weight: 700;
-      color: #8d6e63;
+      color: #795548;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    .btn-login-call {
-      background: var(--duo-blue);
-      color: #fff;
-      border: none;
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
     }
 
     main {
@@ -117,7 +220,6 @@
       padding-bottom: 90px;
     }
 
-    /* BOTTOM NAV */
     nav.bottom-nav {
       position: fixed;
       bottom: 0;
@@ -146,7 +248,6 @@
     .nav-tab.active { color: var(--duo-green); }
     .nav-tab .icon { font-size: 20px; }
 
-    /* UNITS & TREE PATH */
     .unit-card {
       background: var(--duo-green);
       border-radius: 16px;
@@ -218,7 +319,9 @@
       border: 1px solid #ffffff;
     }
 
-    /* QUIZ VIEW */
+    /* ====================================================
+       PAGE 3: QUIZ VIEW & FOOTER
+       ==================================================== */
     .quiz-view {
       display: flex;
       flex-direction: column;
@@ -256,7 +359,7 @@
       font-weight: 700;
     }
     .question-prompt {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 800;
       margin-bottom: 18px;
       line-height: 1.35;
@@ -304,7 +407,6 @@
       border-color: var(--duo-blue);
     }
 
-    /* FOOTER QUIZ */
     .quiz-footer {
       position: fixed;
       bottom: 0;
@@ -327,31 +429,6 @@
     .feedback-msg.show { display: block; }
     .feedback-msg.correct { color: #33691e; }
     .feedback-msg.wrong { color: #b71c1c; }
-
-    .btn-action {
-      background: var(--duo-green);
-      color: #ffffff;
-      border: none;
-      border-bottom: 4px solid var(--duo-green-shadow);
-      padding: 13px;
-      font-size: 16px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      border-radius: 16px;
-      cursor: pointer;
-      width: 100%;
-    }
-    .btn-action:disabled {
-      background: var(--duo-gray);
-      border-bottom-color: var(--duo-dark-gray);
-      color: #8c8c8c;
-      cursor: not-allowed;
-    }
-    .btn-action.btn-wrong {
-      background: var(--duo-red);
-      border-bottom-color: var(--duo-red-shadow);
-    }
 
     /* MODAL */
     .modal-overlay {
@@ -389,7 +466,6 @@
     }
     .input-box:focus { border-color: var(--duo-blue); }
 
-    /* CHEAT SHEET */
     .cheat-card {
       background: #ffffff;
       border: 2px solid var(--duo-gray);
@@ -401,180 +477,218 @@
     .cheat-acronym { font-weight: 900; color: #e65100; font-size: 14px; margin: 3px 0; }
     .cheat-desc { font-size: 13px; line-height: 1.45; }
 
-    /* TABLE */
     table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-    th, td { border: 1px solid var(--duo-gray); padding: 8px; text-align: left; }
+    th, td { border: 1px solid var(--duo-gray); padding: 7px; text-align: left; }
     th { background: #f0f0f0; }
   </style>
 </head>
 <body>
 
 <div id="app-container">
-  <!-- TOP HEADER -->
-  <header>
-    <div class="stat-badge streak" title="Streak Pembelajaran">🔥 <span id="streak-count">1</span></div>
-    <div class="stat-badge gems" title="Mata Ganjaran / XP">💎 <span id="xp-count">30</span></div>
-    <div class="stat-badge hearts" title="Nyawa Tersisa">❤️ <span id="hearts-count">5</span></div>
-    <div style="display: flex; gap: 6px;">
-      <button class="btn-top" onclick="openLoginModal()" id="user-status-btn">Log Masuk</button>
-      <button class="btn-top" onclick="openAdminModal()" title="Konsol Guru / Admin">🔒 Guru</button>
-    </div>
-  </header>
 
-  <!-- GUEST NOTIFICATION BANNER -->
-  <div class="guest-banner" id="guest-bar">
-    <span>💡 <strong>Mod Percubaan:</strong> Bab 1 (Separuh topik sahaja).</span>
-    <button class="btn-login-call" onclick="openLoginModal()">Buka Semua</button>
+  <!-- ====================================================
+       SCREEN 1: LANDING / LOGIN DUOLINGO SCREEN
+       ==================================================== -->
+  <div id="view-welcome">
+    <div style="width: 100%; display: flex; justify-content: flex-end;">
+      <button class="btn-pill" onclick="openAdminModal()">🔒 Guru</button>
+    </div>
+
+    <div>
+      <div class="duo-mascot-box">
+        <div class="duo-mascot-img">🦉</div>
+      </div>
+      <h1 class="brand-title">DuoNiaga</h1>
+      <p class="brand-tagline">Kuasai Perniagaan SPM Tingkatan 4 & 5 dengan teknik pantas menghafal fakta!</p>
+    </div>
+
+    <div class="welcome-actions">
+      <!-- BUTTON 1: CUBA PERCUMA 3 TAHAP -->
+      <button class="btn-duo-main" onclick="enterAsGuest()">
+        🚀 Mula Sekarang (Cuba 3 Tahap)
+      </button>
+
+      <!-- BUTTON 2: LOG MASUK DENGAN AKAUN -->
+      <button class="btn-duo-outline" onclick="openLoginModal()">
+        Saya Sudah Ada Akaun
+      </button>
+
+      <button class="admin-link-btn" onclick="openAdminModal()">
+        Log Masuk Guru / Pentadbir Sistem
+      </button>
+    </div>
   </div>
 
-  <!-- MAIN AREA -->
-  <main id="main-content">
-    <!-- VIEW 1: MAP LALUAN BELAJAR -->
-    <div id="view-map">
-      <!-- Unit 1 (T4) -->
-      <div class="unit-card">
-        <div class="unit-header">Tingkatan 4 • Bab 1</div>
-        <div class="unit-title">Tujuan & Pemilikan Perniagaan</div>
-      </div>
-      <div class="path-tree">
-        <div class="node-row">
-          <div class="lesson-node gold" onclick="launchQuiz(1)" title="Unit 1: Konsep Asas & Pemilikan (Akses Percuma)">
-            💼
-            <span class="crown-tag">Percuma</span>
-          </div>
-        </div>
-        <div class="node-row">
-          <div class="lesson-node locked" id="node-unit-2" onclick="handleLockedNode(2)" title="Unit 2: Klasifikasi & Francais">
-            🔒
-            <span class="crown-tag">Bab 1.4+</span>
-          </div>
-        </div>
-        <div class="node-row">
-          <div class="lesson-node locked" id="node-unit-3" onclick="handleLockedNode(3)" title="Unit 3: Trend & Isu Semasa">
-            🔒
-            <span class="crown-tag">Bab 2</span>
-          </div>
-        </div>
-      </div>
+  <!-- ====================================================
+       SCREEN 2: APP UTAMA (HANYA DITUNJUKKAN SELEPAS MASUK)
+       ==================================================== -->
+  <div id="view-app-main" style="display: none; flex-direction: column; min-height: 100vh;">
+    <!-- TOP HEADER -->
+    <header>
+      <div class="stat-badge streak" title="Streak Pembelajaran">🔥 <span id="streak-count">1</span></div>
+      <div class="stat-badge gems" title="Mata Ganjaran / XP">💎 <span id="xp-count">30</span></div>
+      <div class="stat-badge hearts" title="Nyawa Tersisa">❤️ <span id="hearts-count">5</span></div>
+      <button class="btn-pill" id="user-status-btn" onclick="openLoginModal()">Log Masuk</button>
+    </header>
 
-      <!-- Unit 2 (T5) -->
-      <div class="unit-card t5">
-        <div class="unit-header">Tingkatan 5 • Pengurusan & Kewangan</div>
-        <div class="unit-title">Sumber Manusia, Pembiayaan & Analisis</div>
-      </div>
-      <div class="path-tree">
-        <div class="node-row">
-          <div class="lesson-node locked" id="node-unit-4" onclick="handleLockedNode(4)" title="Unit 4: Sumber Manusia">
-            🔒
-            <span class="crown-tag">T5 Bab 1</span>
-          </div>
-        </div>
-        <div class="node-row">
-          <div class="lesson-node locked" id="node-unit-5" onclick="handleLockedNode(5)" title="Unit 5: Sumber Fizikal & Pembiayaan">
-            🔒
-            <span class="crown-tag">T5 Bab 2,3</span>
-          </div>
-        </div>
-        <div class="node-row">
-          <div class="lesson-node locked" id="node-unit-6" onclick="handleLockedNode(6)" title="Unit 6: Penyata Kewangan & Nisbah">
-            🔒
-            <span class="crown-tag">T5 Bab 4</span>
-          </div>
-        </div>
-      </div>
+    <!-- GUEST TRIAL NOTICE BANNER -->
+    <div class="guest-trial-bar" id="guest-trial-bar">
+      <span>💡 <strong>Mod Percubaan:</strong> Tahap 1 hingga 3 dibuka percuma.</span>
+      <button class="btn-pill" style="background:var(--duo-blue); color:#fff; border:none;" onclick="openLoginModal()">Log Masuk</button>
     </div>
 
-    <!-- VIEW 2: QUIZ SCREEN -->
-    <div id="view-quiz" style="display: none;" class="quiz-view">
-      <div class="quiz-top">
-        <button class="btn-top" onclick="exitQuiz()">✕</button>
-        <div class="progress-bar-wrap">
-          <div id="quiz-progress" class="progress-bar"></div>
+    <!-- MAIN BODY -->
+    <main id="main-content">
+      <!-- MAP LALUAN BELAJAR -->
+      <div id="view-map">
+        <!-- BAHAGIAN 1: TINGKATAN 4 -->
+        <div class="unit-card">
+          <div class="unit-header">Bahagian 1 • Tingkatan 4</div>
+          <div class="unit-title">Asas, Pemilikan & Trend Semasa</div>
+        </div>
+        <div class="path-tree">
+          <div class="node-row">
+            <div class="lesson-node gold" onclick="launchQuiz(1)" title="Tahap 1: Konsep Asas & Tujuan Perniagaan">
+              💼
+              <span class="crown-tag">Tahap 1</span>
+            </div>
+          </div>
+          <div class="node-row">
+            <div class="lesson-node" id="node-level-2" onclick="launchQuiz(2)" title="Tahap 2: Pemilikan Perniagaan & PLT">
+              🏢
+              <span class="crown-tag">Tahap 2</span>
+            </div>
+          </div>
+          <div class="node-row">
+            <div class="lesson-node" id="node-level-3" onclick="launchQuiz(3)" title="Tahap 3: Trend Pasaran & Pengangguran">
+              📈
+              <span class="crown-tag">Tahap 3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BAHAGIAN 2: TINGKATAN 5 -->
+        <div class="unit-card t5">
+          <div class="unit-header">Bahagian 2 • Tingkatan 5</div>
+          <div class="unit-title">Pengurusan, Pembiayaan & Analisis Kewangan</div>
+        </div>
+        <div class="path-tree">
+          <div class="node-row">
+            <div class="lesson-node locked" id="node-level-4" onclick="handleLockedNode(4)" title="Tahap 4: Sumber Manusia & TPM">
+              🔒
+              <span class="crown-tag">Tahap 4</span>
+            </div>
+          </div>
+          <div class="node-row">
+            <div class="lesson-node locked" id="node-level-5" onclick="handleLockedNode(5)" title="Tahap 5: Sumber Teknologi & Pembiayaan">
+              🔒
+              <span class="crown-tag">Tahap 5</span>
+            </div>
+          </div>
+          <div class="node-row">
+            <div class="lesson-node locked" id="node-level-6" onclick="handleLockedNode(6)" title="Tahap 6: Penyata Kewangan & Nisbah">
+              🔒
+              <span class="crown-tag">Tahap 6</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="mnemonic-box" id="q-mnemonic">💡 Tip Hafal: Sila semak kata kunci jawapan</div>
-      <div class="question-prompt" id="q-text">Memuat soalan...</div>
-      <div class="options-grid" id="q-options"></div>
-    </div>
+      <!-- KUIZ SCREEN -->
+      <div id="view-quiz" style="display: none;" class="quiz-view">
+        <div class="quiz-top">
+          <button class="btn-pill" onclick="exitQuiz()">✕</button>
+          <div class="progress-bar-wrap">
+            <div id="quiz-progress" class="progress-bar"></div>
+          </div>
+        </div>
 
-    <!-- VIEW 3: CHEAT SHEET (MNEMONIK) -->
-    <div id="view-cheat" style="display: none;">
-      <h2 style="font-weight: 900; margin-bottom: 12px;">🧠 Formula Cepat Hafal</h2>
-      
-      <div class="cheat-card">
-        <div class="cheat-title">🎯 6 Konsep Asas Perniagaan (T4 Bab 1)</div>
-        <div class="cheat-acronym">B - P - P - K - K - P</div>
-        <div class="cheat-desc"><strong>B</strong>arang/servis, <strong>P</strong>ertukaran nilai, <strong>P</strong>enjual/pembeli, <strong>K</strong>euntungan, <strong>K</strong>ontrak, <strong>P</strong>emuasan keperluan & kehendak.</div>
+        <div class="mnemonic-box" id="q-mnemonic">💡 Tip Cepat Ingat</div>
+        <div class="question-prompt" id="q-text">Memuat soalan...</div>
+        <div class="options-grid" id="q-options"></div>
       </div>
 
-      <div class="cheat-card">
-        <div class="cheat-title">🏢 Perkongsian Liabiliti Terhad (T4 Bab 1)</div>
-        <div class="cheat-acronym">E - L - H</div>
-        <div class="cheat-desc"><strong>E</strong>ntiti berasingan, <strong>L</strong>iabiliti terhad, <strong>H</strong>ayat berterusan.</div>
-      </div>
+      <!-- CHEAT SHEET (MNEMONIK) -->
+      <div id="view-cheat" style="display: none;">
+        <h2 style="font-weight: 900; margin-bottom: 12px;">🧠 Formula Cepat Hafal SPM</h2>
+        
+        <div class="cheat-card">
+          <div class="cheat-title">🎯 6 Konsep Asas Perniagaan (T4 Bab 1)</div>
+          <div class="cheat-acronym">B - P - P - K - K - P</div>
+          <div class="cheat-desc"><strong>B</strong>arang/servis, <strong>P</strong>ertukaran nilai, <strong>P</strong>enjual/pembeli, <strong>K</strong>euntungan, <strong>K</strong>ontrak, <strong>P</strong>emuasan keperluan & kehendak.</div>
+        </div>
 
-      <div class="cheat-card">
-        <div class="cheat-title">👥 4 Jenis Pengangguran (T4 Bab 2)</div>
-        <div class="cheat-acronym">B - K - S - T</div>
-        <div class="cheat-desc"><strong>B</strong>ermusim, <strong>K</strong>itaran (gawat), <strong>S</strong>truktur (industri lapuk), <strong>T</strong>eknologi (automasi).</div>
-      </div>
+        <div class="cheat-card">
+          <div class="cheat-title">🏢 Perkongsian Liabiliti Terhad (T4 Bab 1)</div>
+          <div class="cheat-acronym">E - L - H</div>
+          <div class="cheat-desc"><strong>E</strong>ntiti berasingan, <strong>L</strong>iabiliti terhad, <strong>H</strong>ayat berterusan.</div>
+        </div>
 
-      <div class="cheat-card">
-        <div class="cheat-title">👔 Struktur Organisasi (T5 Bab 1)</div>
-        <div class="cheat-acronym">F - P - W - P - M</div>
-        <div class="cheat-desc"><strong>F</strong>ungsi, <strong>P</strong>roduk, <strong>W</strong>ilayah, <strong>P</strong>elanggan, <strong>M</strong>atriks (sistem berbilang arahan).</div>
-      </div>
+        <div class="cheat-card">
+          <div class="cheat-title">👥 4 Jenis Pengangguran (T4 Bab 2)</div>
+          <div class="cheat-acronym">B - K - S - T</div>
+          <div class="cheat-desc"><strong>B</strong>ermusim, <strong>K</strong>itaran (gawat), <strong>S</strong>truktur (industri lapuk), <strong>T</strong>eknologi (automasi).</div>
+        </div>
 
-      <div class="cheat-card">
-        <div class="cheat-title">⚖️ Rumus Titik Pulang Modal (TPM)</div>
-        <div class="cheat-desc" style="background:#eee; padding:6px; border-radius:8px; font-weight:800;">
-          TPM (unit) = Kos Tetap / (Harga - Kos Berubah)
+        <div class="cheat-card">
+          <div class="cheat-title">👔 Struktur Organisasi (T5 Bab 1)</div>
+          <div class="cheat-acronym">F - P - W - P - M</div>
+          <div class="cheat-desc"><strong>F</strong>ungsi, <strong>P</strong>roduk, <strong>W</strong>ilayah, <strong>P</strong>elanggan, <strong>M</strong>atriks (sistem berbilang arahan).</div>
+        </div>
+
+        <div class="cheat-card">
+          <div class="cheat-title">⚖️ Rumus Titik Pulang Modal (TPM)</div>
+          <div class="cheat-desc" style="background:#eee; padding:6px; border-radius:8px; font-weight:800;">
+            TPM (unit) = Kos Tetap / (Harga - Kos Berubah)
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- QUIZ FOOTER DRAWER -->
-  <div id="quiz-footer" class="quiz-footer" style="display: none;">
-    <div id="feedback-box" class="feedback-msg">
-      <div id="feedback-title" style="font-size: 16px; font-weight: 900;">Betul!</div>
-      <div id="feedback-tip" style="font-size: 13px; font-weight: 700; margin-top: 4px;"></div>
+    <!-- FOOTER KUIZ DRAWER -->
+    <div id="quiz-footer" class="quiz-footer" style="display: none;">
+      <div id="feedback-box" class="feedback-msg">
+        <div id="feedback-title" style="font-size: 16px; font-weight: 900;">Betul!</div>
+        <div id="feedback-tip" style="font-size: 13px; font-weight: 700; margin-top: 4px;"></div>
+      </div>
+      <button id="btn-submit" class="btn-duo-main" disabled onclick="handleQuizAction()">Semak</button>
     </div>
-    <button id="btn-submit" class="btn-action" disabled onclick="handleQuizAction()">Semak</button>
+
+    <!-- BOTTOM NAVBAR -->
+    <nav class="bottom-nav" id="main-nav">
+      <button class="nav-tab active" onclick="switchTab('map')">
+        <span class="icon">🗺️</span>
+        <span>Belajar</span>
+      </button>
+      <button class="nav-tab" onclick="switchTab('cheat')">
+        <span class="icon">📖</span>
+        <span>MnemoniK</span>
+      </button>
+      <button class="nav-tab" onclick="refillHearts()">
+        <span class="icon">❤️</span>
+        <span>Isi Nyawa</span>
+      </button>
+    </nav>
   </div>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="bottom-nav" id="main-nav">
-    <button class="nav-tab active" onclick="switchTab('map')">
-      <span class="icon">🗺️</span>
-      <span>Belajar</span>
-    </button>
-    <button class="nav-tab" onclick="switchTab('cheat')">
-      <span class="icon">📖</span>
-      <span>MnemoniK</span>
-    </button>
-    <button class="nav-tab" onclick="refillHearts()">
-      <span class="icon">❤️</span>
-      <span>Isi Nyawa</span>
-    </button>
-  </nav>
-
+  <!-- ====================================================
+       MODALS: LOGIN MURID & ADMIN GURU
+       ==================================================== -->
   <!-- MODAL: LOGIN MURID -->
   <div class="modal-overlay" id="login-modal">
     <div class="modal-content">
       <div class="modal-title">🔑 Log Masuk Murid</div>
-      <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Dapatkan username dan kata laluan daripada guru anda untuk membuka semua bab T4 & T5.</p>
+      <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Sila masukkan Username & No. Kad Pengenalan anda:</p>
       
-      <label style="font-size: 12px; font-weight: 800;">Username</label>
-      <input type="text" id="login-username" class="input-box" placeholder="Contoh: pelajar1" />
+      <label style="font-size: 12px; font-weight: 800;">Username (Contoh: ADAM / AMMAR / HARINI)</label>
+      <input type="text" id="login-username" class="input-box" placeholder="Contoh: ADAM" />
       
-      <label style="font-size: 12px; font-weight: 800;">Kata Laluan</label>
-      <input type="password" id="login-password" class="input-box" placeholder="••••••••" />
+      <label style="font-size: 12px; font-weight: 800;">Kata Laluan (No. Kad Pengenalan)</label>
+      <input type="password" id="login-password" class="input-box" placeholder="Contoh: 091130010503" />
 
       <div style="display: flex; gap: 8px;">
-        <button class="btn-action" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow);" onclick="submitStudentLogin()">Masuk</button>
-        <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('login-modal')">Batal</button>
+        <button class="btn-duo-main" id="btn-student-submit" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow);" onclick="submitStudentLogin()">Masuk</button>
+        <button class="btn-duo-main" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('login-modal')">Batal</button>
       </div>
     </div>
   </div>
@@ -582,15 +696,15 @@
   <!-- MODAL: KONSOL ADMIN / GURU -->
   <div class="modal-overlay" id="admin-modal">
     <div class="modal-content">
-      <div class="modal-title">🔒 Pengesahan Admin (Guru)</div>
+      <div class="modal-title">🔒 Pengesahan Guru / Admin</div>
       
-      <!-- Login Admin -->
+      <!-- Login Box Admin -->
       <div id="admin-login-box">
-        <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Pengesahan kata laluan disahkan selamat pada pelayan (.gs):</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Pengesahan kata laluan disahkan selamat pada Google Apps Script:</p>
         <input type="password" id="admin-pass-input" class="input-box" placeholder="Masukkan kata laluan admin" />
         <div style="display: flex; gap: 8px;">
-          <button class="btn-action" style="background: var(--duo-purple); border-bottom-color: var(--duo-purple-shadow);" onclick="submitAdminAuth()">Buka Konsol</button>
-          <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('admin-modal')">Batal</button>
+          <button class="btn-duo-main" id="btn-admin-auth" style="background: var(--duo-purple); border-bottom-color: var(--duo-purple-shadow);" onclick="submitAdminAuth()">Buka Konsol</button>
+          <button class="btn-duo-main" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('admin-modal')">Batal</button>
         </div>
       </div>
 
@@ -598,32 +712,52 @@
       <div id="admin-panel-box" style="display: none;">
         <div style="background: #ede7f6; padding: 12px; border-radius: 12px; margin-bottom: 14px;">
           <strong style="font-size: 13px; color: #4a148c;">⚡ Automasi Google Sheet:</strong>
-          <p style="font-size: 12px; margin: 4px 0 8px 0; color:#555;">Klik untuk jana tab 'Soalan' & 'Users' berserta bank soalan silibus T4 & T5 terus ke Google Sheet anda:</p>
-          <button class="btn-action" style="background: var(--duo-green); border-bottom-color: var(--duo-green-shadow); font-size:13px; padding:10px;" onclick="runAutoSetup()">🚀 Jana & Isi Data Automatik</button>
+          <p style="font-size: 12px; margin: 4px 0 8px 0; color:#555;">Jana tab 'Users' (12 murid) & tab 'Soalan' (silibus T4 & T5) terus ke Google Sheet anda:</p>
+          <button class="btn-duo-main" id="btn-auto-setup" style="background: var(--duo-green); border-bottom-color: var(--duo-green-shadow); font-size:13px; padding:10px;" onclick="runAutoSetup()">🚀 Jana & Isi Data Automatik</button>
         </div>
 
         <hr style="border: none; border-top: 1px solid var(--duo-gray); margin: 14px 0;">
 
-        <strong style="font-size: 14px;">➕ Cipta Pengguna Baru:</strong>
-        <input type="text" id="new-user-name" class="input-box" placeholder="Nama Murid (cth: Siti Sarah)" />
-        <input type="text" id="new-user-username" class="input-box" placeholder="Username (cth: sitisarah)" />
-        <input type="text" id="new-user-pass" class="input-box" placeholder="Kata Laluan Baru" />
-        <button class="btn-action" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow); font-size:13px; padding:10px; margin-bottom: 14px;" onclick="createNewStudent()">Daftar Murid</button>
+        <strong style="font-size: 14px;">➕ Tambah Murid Baharu:</strong>
+        <input type="text" id="new-user-name" class="input-box" placeholder="Nama Murid (cth: Daniel)" />
+        <input type="text" id="new-user-username" class="input-box" placeholder="Username (cth: DANIEL)" />
+        <input type="text" id="new-user-pass" class="input-box" placeholder="Kata Laluan / No Kad Pengenalan" />
+        <button class="btn-duo-main" id="btn-create-user" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow); font-size:13px; padding:10px; margin-bottom: 14px;" onclick="createNewStudent()">Daftar Murid</button>
 
         <strong style="font-size: 14px;">📋 Senarai Murid Berdaftar:</strong>
-        <div id="users-table-container" style="max-height: 150px; overflow-y: auto; margin-top: 6px;">
+        <div id="users-table-container" style="max-height: 160px; overflow-y: auto; margin-top: 6px;">
           <p style="font-size: 12px; color: #888;">Memuat data...</p>
         </div>
 
-        <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333; margin-top: 14px; padding:8px;" onclick="closeModal('admin-modal')">Tutup Konsol</button>
+        <button class="btn-duo-main" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333; margin-top: 14px; padding:8px;" onclick="closeModal('admin-modal')">Tutup Konsol</button>
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
   /* ==========================================================
-     SINTESIS AUDIO (BEBAS FAIL LUARAN)
+     KONFIGURASI REST API GOOGLE APPS SCRIPT
+     ========================================================== */
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyxtO3usesnk8TUpEIRhnP2i51xNCfQlPFq9dWCSfk-mF9W4UB0FVPVuT_T2_TZbTdV/exec';
+
+  async function callBackend(payload) {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      return await response.json();
+    } catch (err) {
+      console.error('API Error:', err);
+      return { success: false, message: 'Ralat sambungan ke Google Apps Script.' };
+    }
+  }
+
+  /* ==========================================================
+     SINTESIS AUDIO (WEB AUDIO API)
      ========================================================== */
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   function playSound(type) {
@@ -653,7 +787,7 @@
   }
 
   /* ==========================================================
-     STATUS PENGGUNA & DATA LOKAL
+     STATUS PENGGUNA & FLOW
      ========================================================== */
   let userToken = localStorage.getItem('duoniaga_token') || null;
   let currentStudent = JSON.parse(localStorage.getItem('duoniaga_user') || 'null');
@@ -668,30 +802,34 @@
   let allQuestions = [];
   let isFullAccess = false;
 
-  function updateTopUI() {
-    document.getElementById('streak-count').innerText = stats.streak;
-    document.getElementById('xp-count').innerText = stats.xp;
-    document.getElementById('hearts-count').innerText = stats.hearts;
-
-    const guestBar = document.getElementById('guest-bar');
-    const userBtn = document.getElementById('user-status-btn');
-
-    if (currentStudent && userToken) {
-      guestBar.style.display = 'none';
-      userBtn.innerText = currentStudent.nama.split(' ')[0] + ' (Keluar)';
-      userBtn.onclick = logoutStudent;
-      unlockFullTree();
-    } else {
-      guestBar.style.display = 'flex';
-      userBtn.innerText = 'Log Masuk';
-      userBtn.onclick = openLoginModal;
-      lockTreeForGuest();
-    }
+  // Mod Percubaan (Cuba 3 Tahap)
+  function enterAsGuest() {
+    userToken = null;
+    currentStudent = null;
+    showAppMainScreen();
+    updateUIForGuest();
+    loadQuestionData();
   }
 
-  function lockTreeForGuest() {
-    for (let i = 2; i <= 6; i++) {
-      const el = document.getElementById('node-unit-' + i);
+  function showAppMainScreen() {
+    document.getElementById('view-welcome').style.display = 'none';
+    document.getElementById('view-app-main').style.display = 'flex';
+  }
+
+  function showWelcomeScreen() {
+    document.getElementById('view-welcome').style.display = 'flex';
+    document.getElementById('view-app-main').style.display = 'none';
+  }
+
+  function updateUIForGuest() {
+    document.getElementById('guest-trial-bar').style.display = 'flex';
+    const userBtn = document.getElementById('user-status-btn');
+    userBtn.innerText = 'Log Masuk';
+    userBtn.onclick = openLoginModal;
+
+    // Tahap 1, 2, 3 dibuka; Tahap 4, 5, 6 dikunci
+    for (let i = 4; i <= 6; i++) {
+      const el = document.getElementById('node-level-' + i);
       if (el) {
         el.className = 'lesson-node locked';
         el.innerHTML = '🔒';
@@ -699,72 +837,91 @@
     }
   }
 
-  function unlockFullTree() {
-    const icons = { 2: '📈', 3: '🎯', 4: '👥', 5: '🏛️', 6: '📊' };
-    for (let i = 2; i <= 6; i++) {
-      const el = document.getElementById('node-unit-' + i);
+  function updateUIForLoggedIn() {
+    document.getElementById('guest-trial-bar').style.display = 'none';
+    const userBtn = document.getElementById('user-status-btn');
+    userBtn.innerText = currentStudent.nama + ' (Keluar)';
+    userBtn.onclick = logoutStudent;
+
+    // Buka semua tahap
+    const icons = { 4: '👥', 5: '🏛️', 6: '📊' };
+    for (let i = 4; i <= 6; i++) {
+      const el = document.getElementById('node-level-' + i);
       if (el) {
         el.className = 'lesson-node';
-        el.innerHTML = icons[i] || '⭐';
+        el.innerHTML = icons[i];
       }
     }
   }
 
   /* ==========================================================
-     KOMUNIKASI BACKEND (GOOGLE.SCRIPT.RUN)
+     MEMUAT SOALAN DARI GOOGLE APPS SCRIPT
      ========================================================== */
-  function loadQuestionData() {
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          allQuestions = res.questions;
-          isFullAccess = res.isFullAccess;
-          if (isFullAccess) unlockFullTree();
-        }
-      })
-      .fetchQuestions(userToken);
+  async function loadQuestionData() {
+    const res = await callBackend({ action: 'getQuestions', token: userToken });
+    if (res.success) {
+      allQuestions = res.questions;
+      isFullAccess = res.isFullAccess;
+      if (isFullAccess) {
+        updateUIForLoggedIn();
+      }
+    }
   }
 
-  // Permulaan
   window.onload = function() {
-    updateTopUI();
-    loadQuestionData();
+    document.getElementById('streak-count').innerText = stats.streak;
+    document.getElementById('xp-count').innerText = stats.xp;
+    document.getElementById('hearts-count').innerText = stats.hearts;
+
+    // Jika pengguna telah log masuk sebelum ini, bawa terus ke Learning Path
+    if (userToken && currentStudent) {
+      showAppMainScreen();
+      updateUIForLoggedIn();
+      loadQuestionData();
+    } else {
+      showWelcomeScreen();
+    }
   };
 
   /* ==========================================================
-     LOG MASUK & KESELAMATAN MURID
+     LOG MASUK MURID
      ========================================================== */
   function openLoginModal() {
     document.getElementById('login-modal').classList.add('open');
   }
 
-  function submitStudentLogin() {
+  async function submitStudentLogin() {
     const u = document.getElementById('login-username').value;
     const p = document.getElementById('login-password').value;
+    const btn = document.getElementById('btn-student-submit');
 
     if (!u || !p) {
-      alert('Sila masukkan username & kata laluan!');
+      alert('Sila masukkan Username & No. Kad Pengenalan!');
       return;
     }
 
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          userToken = res.user.token;
-          currentStudent = res.user;
-          localStorage.setItem('duoniaga_token', userToken);
-          localStorage.setItem('duoniaga_user', JSON.stringify(currentStudent));
-          closeModal('login-modal');
-          updateTopUI();
-          loadQuestionData();
-          playSound('correct');
-          alert('Selamat kembali, ' + currentStudent.nama + '! Semua unit T4 & T5 telah dibuka.');
-        } else {
-          playSound('wrong');
-          alert(res.message);
-        }
-      })
-      .loginStudent(u, p);
+    btn.disabled = true;
+    btn.innerText = 'Mengesahkan...';
+
+    const res = await callBackend({ action: 'loginStudent', username: u, password: p });
+    btn.disabled = false;
+    btn.innerText = 'Masuk';
+
+    if (res.success) {
+      userToken = res.user.token;
+      currentStudent = res.user;
+      localStorage.setItem('duoniaga_token', userToken);
+      localStorage.setItem('duoniaga_user', JSON.stringify(currentStudent));
+      closeModal('login-modal');
+      showAppMainScreen();
+      updateUIForLoggedIn();
+      loadQuestionData();
+      playSound('correct');
+      alert('Selamat datang, ' + currentStudent.nama + '! Semua unit silibus SPM telah dibuka.');
+    } else {
+      playSound('wrong');
+      alert(res.message);
+    }
   }
 
   function logoutStudent() {
@@ -773,13 +930,12 @@
       currentStudent = null;
       localStorage.removeItem('duoniaga_token');
       localStorage.removeItem('duoniaga_user');
-      updateTopUI();
-      loadQuestionData();
+      showWelcomeScreen();
     }
   }
 
   /* ==========================================================
-     KONSOL ADMIN & PENGESAHAN SERVER-SIDE
+     KONSOL GURU / ADMIN
      ========================================================== */
   function openAdminModal() {
     document.getElementById('admin-login-box').style.display = 'block';
@@ -788,108 +944,116 @@
     document.getElementById('admin-modal').classList.add('open');
   }
 
-  function submitAdminAuth() {
+  async function submitAdminAuth() {
     const pass = document.getElementById('admin-pass-input').value;
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          verifiedAdminPass = pass;
-          document.getElementById('admin-login-box').style.display = 'none';
-          document.getElementById('admin-panel-box').style.display = 'block';
-          loadUserTable();
-        } else {
-          playSound('wrong');
-          alert(res.message);
-        }
-      })
-      .verifyAdmin(pass);
+    const btn = document.getElementById('btn-admin-auth');
+
+    btn.disabled = true;
+    btn.innerText = 'Menyemak...';
+
+    const res = await callBackend({ action: 'verifyAdmin', password: pass });
+    btn.disabled = false;
+    btn.innerText = 'Buka Konsol';
+
+    if (res.success) {
+      verifiedAdminPass = pass;
+      document.getElementById('admin-login-box').style.display = 'none';
+      document.getElementById('admin-panel-box').style.display = 'block';
+      loadUserTable();
+    } else {
+      playSound('wrong');
+      alert(res.message);
+    }
   }
 
-  function runAutoSetup() {
-    if (!confirm('Adakah anda pasti mahu menjana semula data soalan silibus T4 & T5 ke dalam Google Sheet?')) return;
+  async function runAutoSetup() {
+    if (!confirm('Jana semula tab Users (12 murid) & tab Soalan ke Google Sheet anda?')) return;
+    const btn = document.getElementById('btn-auto-setup');
+    btn.disabled = true;
+    btn.innerText = 'Sedang Menjana...';
 
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          playSound('correct');
-          alert(res.message);
-          loadQuestionData();
-          loadUserTable();
-        } else {
-          alert(res.message);
-        }
-      })
-      .autoSetupDatabase(verifiedAdminPass);
+    const res = await callBackend({ action: 'autoSetup', adminPass: verifiedAdminPass });
+    btn.disabled = false;
+    btn.innerText = '🚀 Jana & Isi Data Automatik';
+
+    if (res.success) {
+      playSound('correct');
+      alert(res.message);
+      loadQuestionData();
+      loadUserTable();
+    } else {
+      alert(res.message);
+    }
   }
 
-  function createNewStudent() {
+  async function createNewStudent() {
     const nama = document.getElementById('new-user-name').value;
     const u = document.getElementById('new-user-username').value;
     const p = document.getElementById('new-user-pass').value;
+    const btn = document.getElementById('btn-create-user');
 
     if (!u || !p) {
-      alert('Sila masukkan username & password.');
+      alert('Sila masukkan Username & Kata Laluan.');
       return;
     }
 
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          alert(res.message);
-          document.getElementById('new-user-name').value = '';
-          document.getElementById('new-user-username').value = '';
-          document.getElementById('new-user-pass').value = '';
-          loadUserTable();
-        } else {
-          alert(res.message);
-        }
-      })
-      .createUserByAdmin(verifiedAdminPass, u, p, nama);
+    btn.disabled = true;
+    btn.innerText = 'Mendaftar...';
+
+    const res = await callBackend({ action: 'createUser', adminPass: verifiedAdminPass, username: u, password: p, nama: nama });
+    btn.disabled = false;
+    btn.innerText = 'Daftar Murid';
+
+    if (res.success) {
+      alert(res.message);
+      document.getElementById('new-user-name').value = '';
+      document.getElementById('new-user-username').value = '';
+      document.getElementById('new-user-pass').value = '';
+      loadUserTable();
+    } else {
+      alert(res.message);
+    }
   }
 
-  function loadUserTable() {
+  async function loadUserTable() {
     const cont = document.getElementById('users-table-container');
-    cont.innerHTML = '<p style="font-size:12px; color:#888;">Memuatkan senarai...</p>';
+    cont.innerHTML = '<p style="font-size:12px; color:#888;">Memuat senarai murid...</p>';
 
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          if (res.users.length === 0) {
-            cont.innerHTML = '<p style="font-size:12px;">Tiada murid berdaftar.</p>';
-            return;
-          }
-          let html = '<table><tr><th>Nama</th><th>Username</th><th>K.Laluan</th></tr>';
-          res.users.forEach(function(usr) {
-            html += `<tr><td>${usr.nama}</td><td><strong>${usr.username}</strong></td><td>${usr.password}</td></tr>`;
-          });
-          html += '</table>';
-          cont.innerHTML = html;
-        }
-      })
-      .getUserListByAdmin(verifiedAdminPass);
+    const res = await callBackend({ action: 'getUsers', adminPass: verifiedAdminPass });
+    if (res.success) {
+      if (res.users.length === 0) {
+        cont.innerHTML = '<p style="font-size:12px;">Tiada murid berdaftar.</p>';
+        return;
+      }
+      let html = '<table><tr><th>Username</th><th>No. KP (Pass)</th><th>Nama</th></tr>';
+      res.users.forEach(function(usr) {
+        html += `<tr><td><strong>${usr.username}</strong></td><td>${usr.password}</td><td>${usr.nama}</td></tr>`;
+      });
+      html += '</table>';
+      cont.innerHTML = html;
+    }
   }
 
   /* ==========================================================
-     ENGINE KUIZ & ALIRAN PERMAINAN
+     KUIZ DUOLINGO
      ========================================================== */
   let activeQuestions = [];
   let currentIdx = 0;
   let chosenOpt = null;
   let quizStage = 'answer';
 
-  function launchQuiz(unitNo) {
+  function launchQuiz(levelNo) {
     if (stats.hearts <= 0) {
-      alert('Nyawa anda telah habis! Sila klik "Isi Nyawa" untuk sambung belajar.');
+      alert('Nyawa anda telah habis! Sila klik "Isi Nyawa" untuk pulihkan hati.');
       return;
     }
 
     activeQuestions = allQuestions.filter(function(q) {
-      if (unitNo === 1) return q.akses === 'Percuma';
-      return q.bab == unitNo || q.unitTitle.includes('Bab ' + unitNo);
+      return q.level == levelNo;
     });
 
     if (activeQuestions.length === 0) {
-      activeQuestions = allQuestions.slice(0, 3);
+      activeQuestions = allQuestions.slice(0, 2);
     }
 
     currentIdx = 0;
@@ -902,13 +1066,13 @@
     showQuestion();
   }
 
-  function handleLockedNode(unitNo) {
+  function handleLockedNode(levelNo) {
     if (!currentStudent) {
       playSound('wrong');
-      alert(`🔒 Unit ${unitNo} Dikunci!\n\nPelawat tanpa login hanya boleh mengakses Bab 1 (Separuh topik asas). Sila log masuk dengan akaun murid daripada guru anda.`);
+      alert(`🔒 Tahap ${levelNo} Dikunci!\n\nMod percubaan hanya dibenarkan sehingga Tahap 3. Sila log masuk menggunakan akaun murid anda.`);
       openLoginModal();
     } else {
-      launchQuiz(unitNo);
+      launchQuiz(levelNo);
     }
   }
 
@@ -939,7 +1103,7 @@
     document.getElementById('feedback-box').className = 'feedback-msg';
     const subBtn = document.getElementById('btn-submit');
     subBtn.innerText = 'Semak';
-    subBtn.className = 'btn-action';
+    subBtn.className = 'btn-duo-main';
     subBtn.disabled = true;
   }
 
@@ -982,16 +1146,18 @@
         feedTitle.innerText = '❌ Kurang Tepat!';
         feedTip.innerHTML = `Jawapan tepat: <strong>${q.options[q.jawapan]}</strong><br>${q.tip}`;
         subBtn.innerText = 'Faham';
-        subBtn.classList.add('btn-wrong');
+        subBtn.style.background = 'var(--duo-red)';
+        subBtn.style.borderBottomColor = 'var(--duo-red-shadow)';
         stats.hearts = Math.max(0, stats.hearts - 1);
       }
 
-      updateTopUI();
+      document.getElementById('xp-count').innerText = stats.xp;
+      document.getElementById('hearts-count').innerText = stats.hearts;
       quizStage = 'feedback';
     } else {
       currentIdx++;
       if (stats.hearts <= 0) {
-        alert('💔 Anda kehabisan nyawa! Semak tab MnemoniK dan pulihkan nyawa anda.');
+        alert('💔 Anda kehabisan nyawa! Buka tab MnemoniK untuk ulangkaji dan isi semula nyawa.');
         exitQuiz();
         return;
       }
@@ -1001,7 +1167,7 @@
       } else {
         playSound('correct');
         document.getElementById('quiz-progress').style.width = '100%';
-        alert('🏆 Tahniah! Anda telah menguasai unit ini.');
+        alert('🏆 Tahniah! Anda telah menguasai tahap ini!');
         exitQuiz();
       }
     }
@@ -1012,12 +1178,8 @@
     document.getElementById('quiz-footer').style.display = 'none';
     document.getElementById('view-map').style.display = 'block';
     document.getElementById('main-nav').style.display = 'flex';
-    updateTopUI();
   }
 
-  /* ==========================================================
-     FUNGSI BANTUAN LAIN
-     ========================================================== */
   function switchTab(tab) {
     const tabs = document.querySelectorAll('.nav-tab');
     tabs.forEach(t => t.classList.remove('active'));
@@ -1035,11 +1197,11 @@
   }
 
   function refillHearts() {
-    if (confirm('Isi semula nyawa anda ke 5 ❤️ secara percuma?')) {
+    if (confirm('Isi semula 5 nyawa ❤️ secara percuma?')) {
       stats.hearts = 5;
+      document.getElementById('hearts-count').innerText = stats.hearts;
       playSound('correct');
-      updateTopUI();
-      alert('Nyawa anda telah penuh!');
+      alert('Nyawa anda telah penuh semula!');
     }
   }
 
