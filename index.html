@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DuoNiaga SPM - Kuasai Perniagaan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --duo-green: #58cc02;
+      --duo-green-shadow: #46a302;
+      --duo-red: #ff4b4b;
+      --duo-red-shadow: #d32f2f;
+      --duo-blue: #1cb0f6;
+      --duo-blue-shadow: #1899d6;
+      --duo-yellow: #ffc800;
+      --duo-yellow-shadow: #e5a500;
+      --duo-purple: #ce82ff;
+      --duo-purple-shadow: #aa50e0;
+      --duo-gray: #e5e5e5;
+      --duo-dark-gray: #afafaf;
+      --duo-text: #3c3c3c;
+      --duo-bg: #f7f7f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--duo-bg);
+      color: var(--duo-text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    #app-container {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.06);
+    }
+
+    /* TOP BAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #ffffff;
+      border-bottom: 2px solid var(--duo-gray);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 15px;
+    }
+    .stat-badge.streak { color: #ff9600; }
+    .stat-badge.gems { color: var(--duo-blue); }
+    .stat-badge.hearts { color: var(--duo-red); }
+
+    .btn-top {
+      background: #f0f0f0;
+      border: 1px solid var(--duo-gray);
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* GUEST BANNER */
+    .guest-banner {
+      background: #fff8e1;
+      border-bottom: 2px solid #ffe082;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8d6e63;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn-login-call {
+      background: var(--duo-blue);
+      color: #fff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    main {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      padding-bottom: 90px;
+    }
+
+    /* BOTTOM NAV */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-top: 2px solid var(--duo-gray);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      z-index: 20;
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--duo-dark-gray);
+      background: none;
+      border: none;
+      cursor: pointer;
+      gap: 4px;
+    }
+    .nav-tab.active { color: var(--duo-green); }
+    .nav-tab .icon { font-size: 20px; }
+
+    /* UNITS & TREE PATH */
+    .unit-card {
+      background: var(--duo-green);
+      border-radius: 16px;
+      padding: 16px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .unit-card.t5 { background: var(--duo-purple); }
+    .unit-header {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+    .unit-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .path-tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+    .node-row:nth-child(even) { transform: translateX(35px); }
+    .node-row:nth-child(odd):not(:first-child) { transform: translateX(-35px); }
+
+    .lesson-node {
+      width: 72px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--duo-green);
+      box-shadow: 0 6px var(--duo-green-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 28px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.1s;
+    }
+    .lesson-node:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px var(--duo-green-shadow);
+    }
+    .lesson-node.locked {
+      background: var(--duo-gray);
+      box-shadow: 0 6px var(--duo-dark-gray);
+      color: #8c8c8c;
+    }
+    .lesson-node.gold {
+      background: var(--duo-yellow);
+      box-shadow: 0 6px var(--duo-yellow-shadow);
+    }
+    .crown-tag {
+      position: absolute;
+      top: -8px;
+      right: -4px;
+      background: var(--duo-yellow);
+      border-radius: 10px;
+      font-size: 10px;
+      padding: 2px 6px;
+      color: #794d00;
+      font-weight: 900;
+      border: 1px solid #ffffff;
+    }
+
+    /* QUIZ VIEW */
+    .quiz-view {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .quiz-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .progress-bar-wrap {
+      flex: 1;
+      height: 14px;
+      background: var(--duo-gray);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--duo-green);
+      width: 0%;
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+
+    .mnemonic-box {
+      background: #e1f5fe;
+      border: 2px dashed var(--duo-blue);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #0277bd;
+      font-weight: 700;
+    }
+    .question-prompt {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      line-height: 1.35;
+    }
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-btn {
+      background: #ffffff;
+      border: 2px solid var(--duo-gray);
+      border-bottom: 4px solid var(--duo-gray);
+      border-radius: 16px;
+      padding: 13px 15px;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      color: var(--duo-text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .option-btn.selected {
+      background: #ddf4ff;
+      border-color: var(--duo-blue);
+      border-bottom-color: var(--duo-blue-shadow);
+      color: #0288d1;
+    }
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--duo-gray);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .option-btn.selected .opt-letter {
+      background: var(--duo-blue);
+      color: #fff;
+      border-color: var(--duo-blue);
+    }
+
+    /* FOOTER QUIZ */
+    .quiz-footer {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      padding: 16px;
+      background: #ffffff;
+      border-top: 2px solid var(--duo-gray);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 30;
+    }
+    .quiz-footer.correct-footer { background: #d7ffb8; border-color: #b5f385; }
+    .quiz-footer.wrong-footer { background: #ffdfe0; border-color: #ffb4b6; }
+
+    .feedback-msg { display: none; }
+    .feedback-msg.show { display: block; }
+    .feedback-msg.correct { color: #33691e; }
+    .feedback-msg.wrong { color: #b71c1c; }
+
+    .btn-action {
+      background: var(--duo-green);
+      color: #ffffff;
+      border: none;
+      border-bottom: 4px solid var(--duo-green-shadow);
+      padding: 13px;
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-radius: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .btn-action:disabled {
+      background: var(--duo-gray);
+      border-bottom-color: var(--duo-dark-gray);
+      color: #8c8c8c;
+      cursor: not-allowed;
+    }
+    .btn-action.btn-wrong {
+      background: var(--duo-red);
+      border-bottom-color: var(--duo-red-shadow);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-content {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 22px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .modal-title { font-size: 18px; font-weight: 900; margin-bottom: 12px; }
+    .input-box {
+      width: 100%;
+      padding: 11px;
+      border: 2px solid var(--duo-gray);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 5px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    .input-box:focus { border-color: var(--duo-blue); }
+
+    /* CHEAT SHEET */
+    .cheat-card {
+      background: #ffffff;
+      border: 2px solid var(--duo-gray);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .cheat-title { font-size: 15px; font-weight: 900; color: var(--duo-blue); }
+    .cheat-acronym { font-weight: 900; color: #e65100; font-size: 14px; margin: 3px 0; }
+    .cheat-desc { font-size: 13px; line-height: 1.45; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+    th, td { border: 1px solid var(--duo-gray); padding: 8px; text-align: left; }
+    th { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+
+<div id="app-container">
+  <!-- TOP HEADER -->
+  <header>
+    <div class="stat-badge streak" title="Streak Pembelajaran">🔥 <span id="streak-count">1</span></div>
+    <div class="stat-badge gems" title="Mata Ganjaran / XP">💎 <span id="xp-count">30</span></div>
+    <div class="stat-badge hearts" title="Nyawa Tersisa">❤️ <span id="hearts-count">5</span></div>
+    <div style="display: flex; gap: 6px;">
+      <button class="btn-top" onclick="openLoginModal()" id="user-status-btn">Log Masuk</button>
+      <button class="btn-top" onclick="openAdminModal()" title="Konsol Guru / Admin">🔒 Guru</button>
+    </div>
+  </header>
+
+  <!-- GUEST NOTIFICATION BANNER -->
+  <div class="guest-banner" id="guest-bar">
+    <span>💡 <strong>Mod Percubaan:</strong> Bab 1 (Separuh topik sahaja).</span>
+    <button class="btn-login-call" onclick="openLoginModal()">Buka Semua</button>
+  </div>
+
+  <!-- MAIN AREA -->
+  <main id="main-content">
+    <!-- VIEW 1: MAP LALUAN BELAJAR -->
+    <div id="view-map">
+      <!-- Unit 1 (T4) -->
+      <div class="unit-card">
+        <div class="unit-header">Tingkatan 4 • Bab 1</div>
+        <div class="unit-title">Tujuan & Pemilikan Perniagaan</div>
+      </div>
+      <div class="path-tree">
+        <div class="node-row">
+          <div class="lesson-node gold" onclick="launchQuiz(1)" title="Unit 1: Konsep Asas & Pemilikan (Akses Percuma)">
+            💼
+            <span class="crown-tag">Percuma</span>
+          </div>
+        </div>
+        <div class="node-row">
+          <div class="lesson-node locked" id="node-unit-2" onclick="handleLockedNode(2)" title="Unit 2: Klasifikasi & Francais">
+            🔒
+            <span class="crown-tag">Bab 1.4+</span>
+          </div>
+        </div>
+        <div class="node-row">
+          <div class="lesson-node locked" id="node-unit-3" onclick="handleLockedNode(3)" title="Unit 3: Trend & Isu Semasa">
+            🔒
+            <span class="crown-tag">Bab 2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unit 2 (T5) -->
+      <div class="unit-card t5">
+        <div class="unit-header">Tingkatan 5 • Pengurusan & Kewangan</div>
+        <div class="unit-title">Sumber Manusia, Pembiayaan & Analisis</div>
+      </div>
+      <div class="path-tree">
+        <div class="node-row">
+          <div class="lesson-node locked" id="node-unit-4" onclick="handleLockedNode(4)" title="Unit 4: Sumber Manusia">
+            🔒
+            <span class="crown-tag">T5 Bab 1</span>
+          </div>
+        </div>
+        <div class="node-row">
+          <div class="lesson-node locked" id="node-unit-5" onclick="handleLockedNode(5)" title="Unit 5: Sumber Fizikal & Pembiayaan">
+            🔒
+            <span class="crown-tag">T5 Bab 2,3</span>
+          </div>
+        </div>
+        <div class="node-row">
+          <div class="lesson-node locked" id="node-unit-6" onclick="handleLockedNode(6)" title="Unit 6: Penyata Kewangan & Nisbah">
+            🔒
+            <span class="crown-tag">T5 Bab 4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: QUIZ SCREEN -->
+    <div id="view-quiz" style="display: none;" class="quiz-view">
+      <div class="quiz-top">
+        <button class="btn-top" onclick="exitQuiz()">✕</button>
+        <div class="progress-bar-wrap">
+          <div id="quiz-progress" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="mnemonic-box" id="q-mnemonic">💡 Tip Hafal: Sila semak kata kunci jawapan</div>
+      <div class="question-prompt" id="q-text">Memuat soalan...</div>
+      <div class="options-grid" id="q-options"></div>
+    </div>
+
+    <!-- VIEW 3: CHEAT SHEET (MNEMONIK) -->
+    <div id="view-cheat" style="display: none;">
+      <h2 style="font-weight: 900; margin-bottom: 12px;">🧠 Formula Cepat Hafal</h2>
+      
+      <div class="cheat-card">
+        <div class="cheat-title">🎯 6 Konsep Asas Perniagaan (T4 Bab 1)</div>
+        <div class="cheat-acronym">B - P - P - K - K - P</div>
+        <div class="cheat-desc"><strong>B</strong>arang/servis, <strong>P</strong>ertukaran nilai, <strong>P</strong>enjual/pembeli, <strong>K</strong>euntungan, <strong>K</strong>ontrak, <strong>P</strong>emuasan keperluan & kehendak.</div>
+      </div>
+
+      <div class="cheat-card">
+        <div class="cheat-title">🏢 Perkongsian Liabiliti Terhad (T4 Bab 1)</div>
+        <div class="cheat-acronym">E - L - H</div>
+        <div class="cheat-desc"><strong>E</strong>ntiti berasingan, <strong>L</strong>iabiliti terhad, <strong>H</strong>ayat berterusan.</div>
+      </div>
+
+      <div class="cheat-card">
+        <div class="cheat-title">👥 4 Jenis Pengangguran (T4 Bab 2)</div>
+        <div class="cheat-acronym">B - K - S - T</div>
+        <div class="cheat-desc"><strong>B</strong>ermusim, <strong>K</strong>itaran (gawat), <strong>S</strong>truktur (industri lapuk), <strong>T</strong>eknologi (automasi).</div>
+      </div>
+
+      <div class="cheat-card">
+        <div class="cheat-title">👔 Struktur Organisasi (T5 Bab 1)</div>
+        <div class="cheat-acronym">F - P - W - P - M</div>
+        <div class="cheat-desc"><strong>F</strong>ungsi, <strong>P</strong>roduk, <strong>W</strong>ilayah, <strong>P</strong>elanggan, <strong>M</strong>atriks (sistem berbilang arahan).</div>
+      </div>
+
+      <div class="cheat-card">
+        <div class="cheat-title">⚖️ Rumus Titik Pulang Modal (TPM)</div>
+        <div class="cheat-desc" style="background:#eee; padding:6px; border-radius:8px; font-weight:800;">
+          TPM (unit) = Kos Tetap / (Harga - Kos Berubah)
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- QUIZ FOOTER DRAWER -->
+  <div id="quiz-footer" class="quiz-footer" style="display: none;">
+    <div id="feedback-box" class="feedback-msg">
+      <div id="feedback-title" style="font-size: 16px; font-weight: 900;">Betul!</div>
+      <div id="feedback-tip" style="font-size: 13px; font-weight: 700; margin-top: 4px;"></div>
+    </div>
+    <button id="btn-submit" class="btn-action" disabled onclick="handleQuizAction()">Semak</button>
+  </div>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="bottom-nav" id="main-nav">
+    <button class="nav-tab active" onclick="switchTab('map')">
+      <span class="icon">🗺️</span>
+      <span>Belajar</span>
+    </button>
+    <button class="nav-tab" onclick="switchTab('cheat')">
+      <span class="icon">📖</span>
+      <span>MnemoniK</span>
+    </button>
+    <button class="nav-tab" onclick="refillHearts()">
+      <span class="icon">❤️</span>
+      <span>Isi Nyawa</span>
+    </button>
+  </nav>
+
+  <!-- MODAL: LOGIN MURID -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-content">
+      <div class="modal-title">🔑 Log Masuk Murid</div>
+      <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Dapatkan username dan kata laluan daripada guru anda untuk membuka semua bab T4 & T5.</p>
+      
+      <label style="font-size: 12px; font-weight: 800;">Username</label>
+      <input type="text" id="login-username" class="input-box" placeholder="Contoh: pelajar1" />
+      
+      <label style="font-size: 12px; font-weight: 800;">Kata Laluan</label>
+      <input type="password" id="login-password" class="input-box" placeholder="••••••••" />
+
+      <div style="display: flex; gap: 8px;">
+        <button class="btn-action" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow);" onclick="submitStudentLogin()">Masuk</button>
+        <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('login-modal')">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KONSOL ADMIN / GURU -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal-content">
+      <div class="modal-title">🔒 Pengesahan Admin (Guru)</div>
+      
+      <!-- Login Admin -->
+      <div id="admin-login-box">
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Pengesahan kata laluan disahkan selamat pada pelayan (.gs):</p>
+        <input type="password" id="admin-pass-input" class="input-box" placeholder="Masukkan kata laluan admin" />
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-action" style="background: var(--duo-purple); border-bottom-color: var(--duo-purple-shadow);" onclick="submitAdminAuth()">Buka Konsol</button>
+          <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333;" onclick="closeModal('admin-modal')">Batal</button>
+        </div>
+      </div>
+
+      <!-- Panel Pengurusan Admin -->
+      <div id="admin-panel-box" style="display: none;">
+        <div style="background: #ede7f6; padding: 12px; border-radius: 12px; margin-bottom: 14px;">
+          <strong style="font-size: 13px; color: #4a148c;">⚡ Automasi Google Sheet:</strong>
+          <p style="font-size: 12px; margin: 4px 0 8px 0; color:#555;">Klik untuk jana tab 'Soalan' & 'Users' berserta bank soalan silibus T4 & T5 terus ke Google Sheet anda:</p>
+          <button class="btn-action" style="background: var(--duo-green); border-bottom-color: var(--duo-green-shadow); font-size:13px; padding:10px;" onclick="runAutoSetup()">🚀 Jana & Isi Data Automatik</button>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--duo-gray); margin: 14px 0;">
+
+        <strong style="font-size: 14px;">➕ Cipta Pengguna Baru:</strong>
+        <input type="text" id="new-user-name" class="input-box" placeholder="Nama Murid (cth: Siti Sarah)" />
+        <input type="text" id="new-user-username" class="input-box" placeholder="Username (cth: sitisarah)" />
+        <input type="text" id="new-user-pass" class="input-box" placeholder="Kata Laluan Baru" />
+        <button class="btn-action" style="background: var(--duo-blue); border-bottom-color: var(--duo-blue-shadow); font-size:13px; padding:10px; margin-bottom: 14px;" onclick="createNewStudent()">Daftar Murid</button>
+
+        <strong style="font-size: 14px;">📋 Senarai Murid Berdaftar:</strong>
+        <div id="users-table-container" style="max-height: 150px; overflow-y: auto; margin-top: 6px;">
+          <p style="font-size: 12px; color: #888;">Memuat data...</p>
+        </div>
+
+        <button class="btn-action" style="background: var(--duo-gray); border-bottom-color: var(--duo-dark-gray); color:#333; margin-top: 14px; padding:8px;" onclick="closeModal('admin-modal')">Tutup Konsol</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==========================================================
+     SINTESIS AUDIO (BEBAS FAIL LUARAN)
+     ========================================================== */
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  function playSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+
+    if (type === 'correct') {
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } else if (type === 'wrong') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.setValueAtTime(164.81, now + 0.15);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+      osc.start(now);
+      osc.stop(now + 0.35);
+    }
+  }
+
+  /* ==========================================================
+     STATUS PENGGUNA & DATA LOKAL
+     ========================================================== */
+  let userToken = localStorage.getItem('duoniaga_token') || null;
+  let currentStudent = JSON.parse(localStorage.getItem('duoniaga_user') || 'null');
+  let verifiedAdminPass = null;
+
+  let stats = {
+    streak: 1,
+    xp: 30,
+    hearts: 5
+  };
+
+  let allQuestions = [];
+  let isFullAccess = false;
+
+  function updateTopUI() {
+    document.getElementById('streak-count').innerText = stats.streak;
+    document.getElementById('xp-count').innerText = stats.xp;
+    document.getElementById('hearts-count').innerText = stats.hearts;
+
+    const guestBar = document.getElementById('guest-bar');
+    const userBtn = document.getElementById('user-status-btn');
+
+    if (currentStudent && userToken) {
+      guestBar.style.display = 'none';
+      userBtn.innerText = currentStudent.nama.split(' ')[0] + ' (Keluar)';
+      userBtn.onclick = logoutStudent;
+      unlockFullTree();
+    } else {
+      guestBar.style.display = 'flex';
+      userBtn.innerText = 'Log Masuk';
+      userBtn.onclick = openLoginModal;
+      lockTreeForGuest();
+    }
+  }
+
+  function lockTreeForGuest() {
+    for (let i = 2; i <= 6; i++) {
+      const el = document.getElementById('node-unit-' + i);
+      if (el) {
+        el.className = 'lesson-node locked';
+        el.innerHTML = '🔒';
+      }
+    }
+  }
+
+  function unlockFullTree() {
+    const icons = { 2: '📈', 3: '🎯', 4: '👥', 5: '🏛️', 6: '📊' };
+    for (let i = 2; i <= 6; i++) {
+      const el = document.getElementById('node-unit-' + i);
+      if (el) {
+        el.className = 'lesson-node';
+        el.innerHTML = icons[i] || '⭐';
+      }
+    }
+  }
+
+  /* ==========================================================
+     KOMUNIKASI BACKEND (GOOGLE.SCRIPT.RUN)
+     ========================================================== */
+  function loadQuestionData() {
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          allQuestions = res.questions;
+          isFullAccess = res.isFullAccess;
+          if (isFullAccess) unlockFullTree();
+        }
+      })
+      .fetchQuestions(userToken);
+  }
+
+  // Permulaan
+  window.onload = function() {
+    updateTopUI();
+    loadQuestionData();
+  };
+
+  /* ==========================================================
+     LOG MASUK & KESELAMATAN MURID
+     ========================================================== */
+  function openLoginModal() {
+    document.getElementById('login-modal').classList.add('open');
+  }
+
+  function submitStudentLogin() {
+    const u = document.getElementById('login-username').value;
+    const p = document.getElementById('login-password').value;
+
+    if (!u || !p) {
+      alert('Sila masukkan username & kata laluan!');
+      return;
+    }
+
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          userToken = res.user.token;
+          currentStudent = res.user;
+          localStorage.setItem('duoniaga_token', userToken);
+          localStorage.setItem('duoniaga_user', JSON.stringify(currentStudent));
+          closeModal('login-modal');
+          updateTopUI();
+          loadQuestionData();
+          playSound('correct');
+          alert('Selamat kembali, ' + currentStudent.nama + '! Semua unit T4 & T5 telah dibuka.');
+        } else {
+          playSound('wrong');
+          alert(res.message);
+        }
+      })
+      .loginStudent(u, p);
+  }
+
+  function logoutStudent() {
+    if (confirm('Adakah anda ingin log keluar?')) {
+      userToken = null;
+      currentStudent = null;
+      localStorage.removeItem('duoniaga_token');
+      localStorage.removeItem('duoniaga_user');
+      updateTopUI();
+      loadQuestionData();
+    }
+  }
+
+  /* ==========================================================
+     KONSOL ADMIN & PENGESAHAN SERVER-SIDE
+     ========================================================== */
+  function openAdminModal() {
+    document.getElementById('admin-login-box').style.display = 'block';
+    document.getElementById('admin-panel-box').style.display = 'none';
+    document.getElementById('admin-pass-input').value = '';
+    document.getElementById('admin-modal').classList.add('open');
+  }
+
+  function submitAdminAuth() {
+    const pass = document.getElementById('admin-pass-input').value;
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          verifiedAdminPass = pass;
+          document.getElementById('admin-login-box').style.display = 'none';
+          document.getElementById('admin-panel-box').style.display = 'block';
+          loadUserTable();
+        } else {
+          playSound('wrong');
+          alert(res.message);
+        }
+      })
+      .verifyAdmin(pass);
+  }
+
+  function runAutoSetup() {
+    if (!confirm('Adakah anda pasti mahu menjana semula data soalan silibus T4 & T5 ke dalam Google Sheet?')) return;
+
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          playSound('correct');
+          alert(res.message);
+          loadQuestionData();
+          loadUserTable();
+        } else {
+          alert(res.message);
+        }
+      })
+      .autoSetupDatabase(verifiedAdminPass);
+  }
+
+  function createNewStudent() {
+    const nama = document.getElementById('new-user-name').value;
+    const u = document.getElementById('new-user-username').value;
+    const p = document.getElementById('new-user-pass').value;
+
+    if (!u || !p) {
+      alert('Sila masukkan username & password.');
+      return;
+    }
+
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          alert(res.message);
+          document.getElementById('new-user-name').value = '';
+          document.getElementById('new-user-username').value = '';
+          document.getElementById('new-user-pass').value = '';
+          loadUserTable();
+        } else {
+          alert(res.message);
+        }
+      })
+      .createUserByAdmin(verifiedAdminPass, u, p, nama);
+  }
+
+  function loadUserTable() {
+    const cont = document.getElementById('users-table-container');
+    cont.innerHTML = '<p style="font-size:12px; color:#888;">Memuatkan senarai...</p>';
+
+    google.script.run
+      .withSuccessHandler(function(res) {
+        if (res.success) {
+          if (res.users.length === 0) {
+            cont.innerHTML = '<p style="font-size:12px;">Tiada murid berdaftar.</p>';
+            return;
+          }
+          let html = '<table><tr><th>Nama</th><th>Username</th><th>K.Laluan</th></tr>';
+          res.users.forEach(function(usr) {
+            html += `<tr><td>${usr.nama}</td><td><strong>${usr.username}</strong></td><td>${usr.password}</td></tr>`;
+          });
+          html += '</table>';
+          cont.innerHTML = html;
+        }
+      })
+      .getUserListByAdmin(verifiedAdminPass);
+  }
+
+  /* ==========================================================
+     ENGINE KUIZ & ALIRAN PERMAINAN
+     ========================================================== */
+  let activeQuestions = [];
+  let currentIdx = 0;
+  let chosenOpt = null;
+  let quizStage = 'answer';
+
+  function launchQuiz(unitNo) {
+    if (stats.hearts <= 0) {
+      alert('Nyawa anda telah habis! Sila klik "Isi Nyawa" untuk sambung belajar.');
+      return;
+    }
+
+    activeQuestions = allQuestions.filter(function(q) {
+      if (unitNo === 1) return q.akses === 'Percuma';
+      return q.bab == unitNo || q.unitTitle.includes('Bab ' + unitNo);
+    });
+
+    if (activeQuestions.length === 0) {
+      activeQuestions = allQuestions.slice(0, 3);
+    }
+
+    currentIdx = 0;
+    document.getElementById('view-map').style.display = 'none';
+    document.getElementById('view-cheat').style.display = 'none';
+    document.getElementById('view-quiz').style.display = 'flex';
+    document.getElementById('main-nav').style.display = 'none';
+    document.getElementById('quiz-footer').style.display = 'flex';
+
+    showQuestion();
+  }
+
+  function handleLockedNode(unitNo) {
+    if (!currentStudent) {
+      playSound('wrong');
+      alert(`🔒 Unit ${unitNo} Dikunci!\n\nPelawat tanpa login hanya boleh mengakses Bab 1 (Separuh topik asas). Sila log masuk dengan akaun murid daripada guru anda.`);
+      openLoginModal();
+    } else {
+      launchQuiz(unitNo);
+    }
+  }
+
+  function showQuestion() {
+    quizStage = 'answer';
+    chosenOpt = null;
+
+    const q = activeQuestions[currentIdx];
+    const pct = (currentIdx / activeQuestions.length) * 100;
+    document.getElementById('quiz-progress').style.width = pct + '%';
+    document.getElementById('q-text').innerText = q.soalan;
+    document.getElementById('q-mnemonic').innerText = '💡 MnemoniK: ' + (q.tip.split(':')[0] || 'Perhatikan kata kunci');
+
+    const optsBox = document.getElementById('q-options');
+    optsBox.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+
+    q.options.forEach(function(opt, idx) {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `<span class="opt-letter">${letters[idx]}</span><span>${opt}</span>`;
+      btn.onclick = function() { selectAnswer(idx); };
+      optsBox.appendChild(btn);
+    });
+
+    const footer = document.getElementById('quiz-footer');
+    footer.className = 'quiz-footer';
+    document.getElementById('feedback-box').className = 'feedback-msg';
+    const subBtn = document.getElementById('btn-submit');
+    subBtn.innerText = 'Semak';
+    subBtn.className = 'btn-action';
+    subBtn.disabled = true;
+  }
+
+  function selectAnswer(idx) {
+    if (quizStage !== 'answer') return;
+    chosenOpt = idx;
+
+    const btns = document.querySelectorAll('.option-btn');
+    btns.forEach(function(b, i) {
+      if (i === idx) b.classList.add('selected');
+      else b.classList.remove('selected');
+    });
+
+    document.getElementById('btn-submit').disabled = false;
+  }
+
+  function handleQuizAction() {
+    if (quizStage === 'answer') {
+      const q = activeQuestions[currentIdx];
+      const footer = document.getElementById('quiz-footer');
+      const feedBox = document.getElementById('feedback-box');
+      const feedTitle = document.getElementById('feedback-title');
+      const feedTip = document.getElementById('feedback-tip');
+      const subBtn = document.getElementById('btn-submit');
+
+      feedBox.classList.add('show');
+
+      if (chosenOpt === q.jawapan) {
+        playSound('correct');
+        footer.classList.add('correct-footer');
+        feedBox.className = 'feedback-msg correct show';
+        feedTitle.innerText = '🎉 Tepat Sekali!';
+        feedTip.innerText = q.tip;
+        subBtn.innerText = 'Teruskan';
+        stats.xp += 10;
+      } else {
+        playSound('wrong');
+        footer.classList.add('wrong-footer');
+        feedBox.className = 'feedback-msg wrong show';
+        feedTitle.innerText = '❌ Kurang Tepat!';
+        feedTip.innerHTML = `Jawapan tepat: <strong>${q.options[q.jawapan]}</strong><br>${q.tip}`;
+        subBtn.innerText = 'Faham';
+        subBtn.classList.add('btn-wrong');
+        stats.hearts = Math.max(0, stats.hearts - 1);
+      }
+
+      updateTopUI();
+      quizStage = 'feedback';
+    } else {
+      currentIdx++;
+      if (stats.hearts <= 0) {
+        alert('💔 Anda kehabisan nyawa! Semak tab MnemoniK dan pulihkan nyawa anda.');
+        exitQuiz();
+        return;
+      }
+
+      if (currentIdx < activeQuestions.length) {
+        showQuestion();
+      } else {
+        playSound('correct');
+        document.getElementById('quiz-progress').style.width = '100%';
+        alert('🏆 Tahniah! Anda telah menguasai unit ini.');
+        exitQuiz();
+      }
+    }
+  }
+
+  function exitQuiz() {
+    document.getElementById('view-quiz').style.display = 'none';
+    document.getElementById('quiz-footer').style.display = 'none';
+    document.getElementById('view-map').style.display = 'block';
+    document.getElementById('main-nav').style.display = 'flex';
+    updateTopUI();
+  }
+
+  /* ==========================================================
+     FUNGSI BANTUAN LAIN
+     ========================================================== */
+  function switchTab(tab) {
+    const tabs = document.querySelectorAll('.nav-tab');
+    tabs.forEach(t => t.classList.remove('active'));
+
+    document.getElementById('view-map').style.display = 'none';
+    document.getElementById('view-cheat').style.display = 'none';
+
+    if (tab === 'map') {
+      tabs[0].classList.add('active');
+      document.getElementById('view-map').style.display = 'block';
+    } else if (tab === 'cheat') {
+      tabs[1].classList.add('active');
+      document.getElementById('view-cheat').style.display = 'block';
+    }
+  }
+
+  function refillHearts() {
+    if (confirm('Isi semula nyawa anda ke 5 ❤️ secara percuma?')) {
+      stats.hearts = 5;
+      playSound('correct');
+      updateTopUI();
+      alert('Nyawa anda telah penuh!');
+    }
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+</script>
+</body>
+</html>
